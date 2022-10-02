@@ -1,17 +1,17 @@
 import math
 
 
-def bubble_sort(a_list):
+def bubblesort(a_list):
     for i in range(len(a_list)):
         for j in range(i + 1, len(a_list)):
-            if a_list[i] > a_list[j]:
+            if a_list[i] > a_list[j] and a_list[i] != 9:
                 a_list[i], a_list[j] = a_list[j], a_list[i]
 
 
 def _quicksort(a_list, lo, hi):
-    if all([lo >= 0, hi >= 0, lo < hi]):
+    if lo < hi:
         pivot = _partition(a_list, lo, hi)
-        _quicksort(a_list, lo, pivot)
+        _quicksort(a_list, lo, pivot - 1)
         _quicksort(a_list, pivot + 1, hi)
 
 
@@ -20,17 +20,15 @@ def quicksort(a_list):
 
 
 def _partition(a_list, lo, hi):
-    pivot = a_list[math.floor((lo + hi) / 2)]
-    while True:
-        while a_list[lo] < pivot:
-            lo = lo + 1
-        while a_list[hi] > pivot:
-            hi = hi - 1
-        if lo >= hi:
-            return hi
+    pivot = a_list[hi]
 
-        _swap(a_list, lo, hi)
+    i = lo - 1
 
+    for j in range(lo, hi):
+        if a_list[j] <= pivot:
+            i = i + 1
+            a_list[i], a_list[j] = a_list[j], a_list[i]
 
-def _swap(a_list, lo, hi):
-    a_list[lo], a_list[hi] = a_list[hi], a_list[lo]
+    a_list[i + 1], a_list[hi] = a_list[hi], a_list[i + 1]
+
+    return i + 1
