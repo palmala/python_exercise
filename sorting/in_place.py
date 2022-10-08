@@ -1,6 +1,3 @@
-import math
-
-
 def bubblesort(a_list):
     for i in range(len(a_list)):
         for j in range(i + 1, len(a_list)):
